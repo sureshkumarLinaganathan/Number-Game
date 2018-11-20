@@ -2,7 +2,7 @@
 //  SolutionViewController.swift
 //  Number Game
 //
-//  Created by Natarajan on 21/11/18.
+//  Created by Suresh Kumar on 21/11/18.
 //  Copyright © 2018 Suresh Kumar. All rights reserved.
 //
 
