@@ -18,8 +18,13 @@ class SolutionViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var replayButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var calculatorView: UIView!
+    
+    let NUMBER_OF_OPERRATIONS = 4
+    let RANDOM_NUMBER_MAX_LIMIT = 1000
+    let RANDOM_NUMBR_MIN_LIMIT = 0
+    
+    
     
     var selectdNumber:Array<Int> = []
     var timerValue:Int = 30
@@ -69,10 +74,10 @@ class SolutionViewController: UIViewController {
     
     func randomNumberGenerator(){
         
-        let numberOperations = Int.random(in: 1..<4)
+        let numberOperations = Int.random(in: 1..<NUMBER_OF_OPERRATIONS)
         var count:Int = 1
         while count<=numberOperations {
-            let operationChoise = Int.random(in:1...4)
+            let operationChoise = Int.random(in:1...NUMBER_OF_OPERRATIONS)
             self.randomNumberCalculation(choice: operationChoise)
             count = count+1
         }
@@ -88,7 +93,7 @@ class SolutionViewController: UIViewController {
         case 1:
             var sum = firstNumber+secondNumber
             sum = randomNumber+sum
-            if(sum<1000&&sum>0){
+            if(sum<RANDOM_NUMBER_MAX_LIMIT&&sum>RANDOM_NUMBR_MIN_LIMIT){
                 var str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"+")
                 randomNumber = sum
                 str = str + "=" + String(randomNumber)
@@ -98,7 +103,7 @@ class SolutionViewController: UIViewController {
         case 2:
             var sub = self.subtractValue(firstNumber:firstNumber, secondNumber:secondNumber)
             sub = self.subtractValue(firstNumber:sub, secondNumber:randomNumber)
-            if(sub<1000&&sub>0){
+            if(sub<RANDOM_NUMBER_MAX_LIMIT&&sub>RANDOM_NUMBR_MIN_LIMIT){
                 var str:String;
                 if(firstNumber>secondNumber){
                     str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"-")
@@ -113,7 +118,7 @@ class SolutionViewController: UIViewController {
         case 3:
             var ans = firstNumber * secondNumber;
             ans = randomNumber == 0 ? 1*ans :ans*randomNumber
-            if(ans<1000&&ans>0){
+            if(ans<RANDOM_NUMBER_MAX_LIMIT&&ans>RANDOM_NUMBR_MIN_LIMIT){
                 var str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"*")
                 randomNumber = ans
                 str = str + "=" + String(randomNumber)
@@ -124,7 +129,7 @@ class SolutionViewController: UIViewController {
             var ans = self.findQuotient(firstNumber:firstNumber, secondNumber:secondNumber)
             randomNumber = randomNumber == 0 ? 1:randomNumber
             ans = self.findQuotient(firstNumber:randomNumber, secondNumber:ans)
-            if(ans<1000&&ans>0){
+            if(ans<RANDOM_NUMBER_MAX_LIMIT&&ans>RANDOM_NUMBR_MIN_LIMIT){
                 var str:String;
                 if(firstNumber>secondNumber){
                     str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"/")
@@ -181,22 +186,19 @@ class SolutionViewController: UIViewController {
             if(isWin){
                 self.navigationController?.popViewController(animated:true)
             }else{
-                self.tableView.isHidden = false
-                self.replayButton.isHidden = false
-                self.calculatorView.isHidden = true
-                self.tableView.reloadData()
+                self.showSolutionView()
             }
         }
         alert.addAction(okAction)
         self.present(alert, animated:true, completion:nil)
     }
-    @IBAction func backButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated:true)
-    }
-    @IBAction func replyButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated:true)
-    }
     
+    func showSolutionView(){
+        self.tableView.isHidden = false
+        self.replayButton.isHidden = false
+        self.calculatorView.isHidden = true
+        self.tableView.reloadData()
+    }
     func calculateScore(total:Int)->Int{
         let userDefaults:UserDefaults = UserDefaults.standard
         var oldScore:Int = userDefaults.value(forKey:"score") as! Int;
@@ -210,6 +212,13 @@ class SolutionViewController: UIViewController {
         }
         userDefaults.set(oldScore, forKey:"score")
         return oldScore
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated:true)
+    }
+    @IBAction func replyButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated:true)
     }
 }
 
@@ -274,18 +283,6 @@ extension SolutionViewController:CalculatorCollectionViewCellDelegate{
         }
         
     }
-    func reset(){
-        self.textField.text = ""
-        self.selectedIndex.removeAll()
-        self.collectionView.reloadData()
-        self.resetOperationValues()
-    }
-    func resetOperationValues(){
-        self.firstNumber = 0
-        self.secondNumber = 0
-        self.operationValue = ""
-        self.actionCount = 0
-    }
     
     func setValueForTextField(index:Int){
         actionCount = actionCount+1
@@ -322,7 +319,20 @@ extension SolutionViewController:CalculatorCollectionViewCellDelegate{
             self.timer?.invalidate()
             let score = self.calculateScore(total:total)
             self.showScore(title:"You Win!", buttonTitle:"New Round", isWin:true, score:score)
+            
         }
+    }
+    func reset(){
+        self.textField.text = ""
+        self.selectedIndex.removeAll()
+        self.collectionView.reloadData()
+        self.resetOperationValues()
+    }
+    func resetOperationValues(){
+        self.firstNumber = 0
+        self.secondNumber = 0
+        self.operationValue = ""
+        self.actionCount = 0
     }
 }
 

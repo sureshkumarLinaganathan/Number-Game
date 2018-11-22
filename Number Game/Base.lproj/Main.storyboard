@@ -12,7 +12,7 @@
         <!--Number Game-->
         <scene sceneID="M53-HX-nMF">
             <objects>
-                <viewController id="C77-MA-4gW" customClass="ViewController" customModule="Number_Game" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C77-MA-4gW" customClass="HomeViewController" customModule="Number_Game" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iav-Qx-6t9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -17,7 +17,6 @@ class CollectionViewCell: UICollectionViewCell {
     func setupView(number:Int,isBigNumber:Bool,isVisible:Bool){
         self.numberLabel.text = String(describing:number)
         self.numberLabel.layer.masksToBounds = true
-       // self.numberLabel.layer.cornerRadius = self.frame.height/2
         self.setBackgroundColor(isBigNumber: isBigNumber)
         if(isVisible){
             self.numberLabel.textColor = UIColor.white

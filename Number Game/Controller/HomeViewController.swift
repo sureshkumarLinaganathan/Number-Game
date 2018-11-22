@@ -8,12 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var randomNumberGenerateButton: UIButton!
     let ITEM_COUNT = 24
+    let NUMBER_OF_ITEMS_ROW:CGFloat = 5
+    let MAX_LIMT = 6
     
     var suffeldArray:Array<Int> = []
     var selectedIndex:Array<Int> = []
@@ -67,13 +69,13 @@ class ViewController: UIViewController {
         }
     }
     func isNeedShowRandomGenerateButton(){
-        if(self.selectedNumber.count == 6){
+        if(self.selectedNumber.count == MAX_LIMT){
             self.randomNumberGenerateButton.isHidden = false
         }
     }
 }
 
-extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ITEM_COUNT
@@ -89,8 +91,8 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = collectionView.frame.size
-        let height = size.width/5
-        let width = size.width/5
+        let height = size.width/NUMBER_OF_ITEMS_ROW
+        let width = size.width/NUMBER_OF_ITEMS_ROW
         return CGSize(width:height, height: width)
     }
     
