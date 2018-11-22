@@ -21,18 +21,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let numbers = [1,2,3,4,5,6,25,7,8,100,9,10,75,1,2,3,4,50,5,6,7,8,9,10]
-        suffeldArray = numbers.shuffled()
-        self.setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        self.setupDataSourceForGame()
+        self.setupView()
     }
     func setupView(){
         self.randomNumberGenerateButton.layer.cornerRadius = self.randomNumberGenerateButton.frame.width/2;
         self.randomNumberGenerateButton.backgroundColor = UIColor.red;
+        self.randomNumberGenerateButton.isHidden = true
+    }
+    func setupDataSourceForGame(){
+        let numbers = [1,2,3,4,5,6,25,7,8,100,9,10,75,1,2,3,4,50,5,6,7,8,9,10]
+        suffeldArray = numbers.shuffled()
+        self.selectedNumber = []
+        self.selectedIndex = []
+        self.collectionView.reloadData()
     }
     func isBigNumber(number:Int)->Bool{
         if((number == 25)||(number == 50)||(number == 75)||(number == 100)){
@@ -51,10 +58,14 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if(segue.identifier == SOLUTION_VIEWCONTROLLER_SEGUE){
             let controller:SolutionViewController = segue.destination as! SolutionViewController
             controller.selectdNumber = self.selectedNumber
+        }
+    }
+    func isNeedShowRandomGenerateButton(){
+        if(self.selectedNumber.count == 6){
+            self.randomNumberGenerateButton.isHidden = false
         }
     }
 }
@@ -87,6 +98,7 @@ extension ViewController:UICollectionViewDelegate,UICollectionViewDataSource,UIC
             self.selectedNumber.append(selectedNumber);
             self.collectionView.reloadItems(at: [indexPath])
         }
+        self.isNeedShowRandomGenerateButton()
     }
     
 }
