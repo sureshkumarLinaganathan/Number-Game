@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F238A1321A71FEE006A43D0 /* CalculatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F238A1221A71FEE006A43D0 /* CalculatorCollectionViewCell.swift */; };
 		1F3B2A7221A34C770072280D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B2A7121A34C770072280D /* AppDelegate.swift */; };
 		1F3B2A7421A34C770072280D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B2A7321A34C770072280D /* ViewController.swift */; };
 		1F3B2A7721A34C770072280D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3B2A7521A34C770072280D /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F238A1221A71FEE006A43D0 /* CalculatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		1F3B2A6E21A34C770072280D /* Number Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Number Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B2A7121A34C770072280D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F3B2A7321A34C770072280D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				1F3B2A8321A34D530072280D /* CollectionViewCell.swift */,
 				93752A7221A691C000F17378 /* SolutionTableViewCell.swift */,
+				1F238A1221A71FEE006A43D0 /* CalculatorCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				1FC63BE121A4897D00705140 /* Theme.swift in Sources */,
 				1F3B2A7221A34C770072280D /* AppDelegate.swift in Sources */,
 				1F3B2A8421A34D530072280D /* CollectionViewCell.swift in Sources */,
+				1F238A1321A71FEE006A43D0 /* CalculatorCollectionViewCell.swift in Sources */,
 				93752A7321A691C000F17378 /* SolutionTableViewCell.swift in Sources */,
 				1FC63BE321A48F7E00705140 /* SolutionViewController.swift in Sources */,
 			);

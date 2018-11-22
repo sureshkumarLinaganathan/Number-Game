@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let userDefaults:UserDefaults = UserDefaults.standard;
+        userDefaults.set(0, forKey: "score")
+        userDefaults.synchronize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
