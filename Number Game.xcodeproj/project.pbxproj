@@ -15,6 +15,7 @@
 		1F3B2A8421A34D530072280D /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B2A8321A34D530072280D /* CollectionViewCell.swift */; };
 		1FC63BE121A4897D00705140 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC63BE021A4897D00705140 /* Theme.swift */; };
 		1FC63BE321A48F7E00705140 /* SolutionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC63BE221A48F7E00705140 /* SolutionViewController.swift */; };
+		93752A7321A691C000F17378 /* SolutionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93752A7221A691C000F17378 /* SolutionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1F3B2A8321A34D530072280D /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		1FC63BE021A4897D00705140 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1FC63BE221A48F7E00705140 /* SolutionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionViewController.swift; sourceTree = "<group>"; };
+		93752A7221A691C000F17378 /* SolutionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				1F3B2A8321A34D530072280D /* CollectionViewCell.swift */,
+				93752A7221A691C000F17378 /* SolutionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				1FC63BE121A4897D00705140 /* Theme.swift in Sources */,
 				1F3B2A7221A34C770072280D /* AppDelegate.swift in Sources */,
 				1F3B2A8421A34D530072280D /* CollectionViewCell.swift in Sources */,
+				93752A7321A691C000F17378 /* SolutionTableViewCell.swift in Sources */,
 				1FC63BE321A48F7E00705140 /* SolutionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
