@@ -255,7 +255,7 @@ extension SolutionViewController:CalculatorCollectionViewCellDelegate{
     func performOperation(index:Int){
         if((index<6)&&((self.actionCount == 0)||(self.actionCount == 2))){
             self.selectedIndex.append(index)
-            if(self.firstNumber == 0){
+            if((self.firstNumber == 0)&&(actionCount == 0)){
                 self.firstNumber = self.numberArray[index]
             }else{
                 self.secondNumber = self.numberArray[index]
