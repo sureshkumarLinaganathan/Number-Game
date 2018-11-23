@@ -72,100 +72,6 @@ class SolutionViewController: UIViewController {
         self.timer = Timer.scheduledTimer(timeInterval:1.0, target:self, selector:#selector(setTimerValue) , userInfo:nil, repeats:true)
     }
     
-    func randomNumberGenerator(){
-        
-        let numberOperations = Int.random(in: 1..<NUMBER_OF_OPERRATIONS)
-        var count:Int = 1
-        while count<=numberOperations {
-            let operationChoise = Int.random(in:1...NUMBER_OF_OPERRATIONS)
-            self.randomNumberCalculation(choice: operationChoise)
-            count = count+1
-        }
-        self.randomNumberLabel.text = String(randomNumber)
-    }
-    
-    func randomNumberCalculation(choice:Int){
-        let firstNumber:Int = self.selectdNumber[Int.random(in:0..<selectdNumber.count)]
-        selectdNumber.remove(at:selectdNumber.firstIndex(of:firstNumber)!)
-        let secondNumber:Int = self.selectdNumber[Int.random(in:0..<selectdNumber.count)]
-        selectdNumber.remove(at:selectdNumber.firstIndex(of:secondNumber)!)
-        switch choice {
-        case 1:
-            var sum = firstNumber+secondNumber
-            sum = randomNumber+sum
-            if(sum<RANDOM_NUMBER_MAX_LIMIT&&sum>RANDOM_NUMBR_MIN_LIMIT){
-                var str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"+")
-                randomNumber = sum
-                str = str + "=" + String(randomNumber)
-                self.solutionArray.append(str)
-            }
-            
-        case 2:
-            var sub = self.subtractValue(firstNumber:firstNumber, secondNumber:secondNumber)
-            sub = self.subtractValue(firstNumber:sub, secondNumber:randomNumber)
-            if(sub<RANDOM_NUMBER_MAX_LIMIT&&sub>RANDOM_NUMBR_MIN_LIMIT){
-                var str:String;
-                if(firstNumber>secondNumber){
-                    str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"-")
-                }else{
-                    str = self.createDataSourceForsolutionTableview(firsNumber:secondNumber, secondNumber:firstNumber, randomNumber:randomNumber, choice:"-")
-                }
-                randomNumber = sub
-                str = str + "=" + String(randomNumber)
-                self.solutionArray.append(str)
-                
-            }
-        case 3:
-            var ans = firstNumber * secondNumber;
-            ans = randomNumber == 0 ? 1*ans :ans*randomNumber
-            if(ans<RANDOM_NUMBER_MAX_LIMIT&&ans>RANDOM_NUMBR_MIN_LIMIT){
-                var str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"*")
-                randomNumber = ans
-                str = str + "=" + String(randomNumber)
-                self.solutionArray.append(str)
-                
-            }
-        default:
-            var ans = self.findQuotient(firstNumber:firstNumber, secondNumber:secondNumber)
-            randomNumber = randomNumber == 0 ? 1:randomNumber
-            ans = self.findQuotient(firstNumber:randomNumber, secondNumber:ans)
-            if(ans<RANDOM_NUMBER_MAX_LIMIT&&ans>RANDOM_NUMBR_MIN_LIMIT){
-                var str:String;
-                if(firstNumber>secondNumber){
-                    str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:"/")
-                }else{
-                    str = self.createDataSourceForsolutionTableview(firsNumber:secondNumber, secondNumber:firstNumber, randomNumber:randomNumber, choice:"/")
-                }
-                randomNumber = ans
-                str = str + "=" + String(randomNumber)
-                self.solutionArray.append(str)
-                
-            }
-        }
-    }
-    
-    func findQuotient(firstNumber:Int,secondNumber:Int)->Int{
-        if(firstNumber>secondNumber){
-            return firstNumber/secondNumber
-        }else{
-            return secondNumber/firstNumber
-        }
-    }
-    func subtractValue(firstNumber:Int,secondNumber:Int)->Int{
-        if(firstNumber>secondNumber){
-            return firstNumber-secondNumber
-        }else{
-            return secondNumber-firstNumber
-        }
-    }
-    
-    func createDataSourceForsolutionTableview(firsNumber:Int,secondNumber:Int,randomNumber:Int,choice:String) ->String{
-        var str = "("+String(firsNumber)+choice+String(secondNumber)+")";
-        if(randomNumber>0){
-            str = "("+String(randomNumber)+")"+choice+str
-        }
-        return str;
-    }
     
     @objc func setTimerValue(){
         self.timerLabel.text = String(timerValue)
@@ -180,7 +86,7 @@ class SolutionViewController: UIViewController {
     }
     
     func showScore(title:String,buttonTitle:String,isWin:Bool,score:Int){
-        let msg = "Your Score is "+String(score)
+        let msg = "Your Total Score is "+String(score)
         let alert = UIAlertController.init(title:title, message:msg, preferredStyle:.alert)
         let okAction = UIAlertAction.init(title:buttonTitle, style:.default) { (action) in
             if(isWin){
@@ -219,6 +125,86 @@ class SolutionViewController: UIViewController {
     }
     @IBAction func replyButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated:true)
+    }
+}
+
+extension SolutionViewController{
+    func randomNumberGenerator(){
+        let numberOperations = Int.random(in: 1..<NUMBER_OF_OPERRATIONS)
+        var count:Int = 1
+        while count<=numberOperations {
+            let operationChoise = Int.random(in:1...NUMBER_OF_OPERRATIONS)
+            self.randomNumberCalculation(choice: operationChoise)
+            count = count+1
+        }
+        self.randomNumberLabel.text = String(randomNumber)
+    }
+    
+    func randomNumberCalculation(choice:Int){
+        let firstNumber:Int = self.selectdNumber[Int.random(in:0..<selectdNumber.count)]
+        selectdNumber.remove(at:selectdNumber.firstIndex(of:firstNumber)!)
+        let secondNumber:Int = self.selectdNumber[Int.random(in:0..<selectdNumber.count)]
+        selectdNumber.remove(at:selectdNumber.firstIndex(of:secondNumber)!)
+        switch choice {
+        case 1:
+            var sum = firstNumber+secondNumber
+            sum = randomNumber+sum
+            self.createDatatSourceForSolutionView(firstNumber:firstNumber, secondNumber: secondNumber, total:sum,choice:"+")
+            
+        case 2:
+            var sub = self.subtractValue(firstNumber:firstNumber, secondNumber:secondNumber)
+            sub = self.subtractValue(firstNumber:sub, secondNumber:randomNumber)
+            self.createDatatSourceForSolutionView(firstNumber:firstNumber, secondNumber:secondNumber, total:sub, choice:"-")
+            
+        case 3:
+            var ans = firstNumber * secondNumber;
+            ans = randomNumber == 0 ? 1*ans :ans*randomNumber
+            self.createDatatSourceForSolutionView(firstNumber:firstNumber, secondNumber: secondNumber, total:ans,choice:"*")
+            
+        default:
+            var ans = self.findQuotient(firstNumber:firstNumber, secondNumber:secondNumber)
+            randomNumber = randomNumber == 0 ? 1:randomNumber
+            ans = self.findQuotient(firstNumber:randomNumber, secondNumber:ans)
+            self.createDatatSourceForSolutionView(firstNumber:firstNumber, secondNumber:secondNumber, total:ans, choice:"/")
+        }
+    }
+    
+    func createDatatSourceForSolutionView(firstNumber:Int,secondNumber:Int,total:Int,choice:String){
+        if(total<RANDOM_NUMBER_MAX_LIMIT&&total>RANDOM_NUMBR_MIN_LIMIT){
+            var str:String;
+            if(firstNumber>secondNumber){
+                str = self.createDataSourceForsolutionTableview(firsNumber:firstNumber, secondNumber:secondNumber, randomNumber:randomNumber, choice:choice)
+            }else{
+                str = self.createDataSourceForsolutionTableview(firsNumber:secondNumber, secondNumber:firstNumber, randomNumber:randomNumber, choice:choice)
+            }
+            randomNumber = total
+            str = str + "=" + String(randomNumber)
+            self.solutionArray.append(str)
+            
+        }
+    }
+    
+    func findQuotient(firstNumber:Int,secondNumber:Int)->Int{
+        if(firstNumber>secondNumber){
+            return firstNumber/secondNumber
+        }else{
+            return secondNumber/firstNumber
+        }
+    }
+    func subtractValue(firstNumber:Int,secondNumber:Int)->Int{
+        if(firstNumber>secondNumber){
+            return firstNumber-secondNumber
+        }else{
+            return secondNumber-firstNumber
+        }
+    }
+    
+    func createDataSourceForsolutionTableview(firsNumber:Int,secondNumber:Int,randomNumber:Int,choice:String) ->String{
+        var str = "("+String(firsNumber)+choice+String(secondNumber)+")";
+        if(randomNumber>0){
+            str = "("+String(randomNumber)+")"+choice+str
+        }
+        return str;
     }
 }
 
@@ -335,6 +321,7 @@ extension SolutionViewController:CalculatorCollectionViewCellDelegate{
         self.actionCount = 0
     }
 }
+
 
 
 
